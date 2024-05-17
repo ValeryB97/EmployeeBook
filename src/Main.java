@@ -14,7 +14,7 @@ public class Main {
         employees[9] = new Employee("Бабарыко Валерий Владимирович", 5, 158393);
 
         allWorker();
-        monthSalary();
+        System.out.println("Затраты на ЗП в месяц - " + monthSalary() + " рублей");
         averageSalary();
         maxSalary();
         minSalary();
@@ -28,44 +28,48 @@ public class Main {
         }
     }
 
-    public static void monthSalary() {
+    public static int monthSalary() {
         // Затраты на ЗП в месяц
         int sumSalary = 0;
         for (Employee employee : employees) {
             sumSalary = sumSalary + employee.getSalary();
         }
-        System.out.println("Затраты на ЗП в месяц - " + sumSalary + " рублей");
+        return sumSalary;
     }
 
     public static void averageSalary() {
         // Среднее значение зарплаты
         int averageSalary = 0;
         for (Employee employee : employees) {
-            averageSalary = averageSalary + employee.getSalary();
+            averageSalary = monthSalary() / employees.length;
         }
-        System.out.println("Средние затраты ЗП за месяц - " + averageSalary / employees.length + " рублей");
+        System.out.println("Средние затраты ЗП за месяц - " + averageSalary + " рублей");
     }
 
     public static void minSalary() {
         // Сотрудник с минимальной зарплатой
+        int idWorker = 0;
         int minSalary = Integer.MAX_VALUE;
-        for (Employee employee : employees) {
-            if (employee.getSalary() < minSalary) {
-                minSalary = employee.getSalary();
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i].getSalary() < minSalary) {
+                minSalary = employees[i].getSalary();
+                idWorker = i;
             }
         }
-        System.out.println("Минимальная зарплата сотрудника составляет - " + minSalary + " рублей");
+        System.out.println("Сотрудник с минимальной зарплатой  - " + employees[idWorker]);
     }
 
     public static void maxSalary() {
         // Сотрудник с максимальной зарплатой
+        int idWorker = 0;
         int maxSalary = Integer.MIN_VALUE;
-        for (Employee employee : employees) {
-            if (employee.getSalary() > maxSalary) {
-                maxSalary = employee.getSalary();
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i].getSalary() > maxSalary) {
+                maxSalary = employees[i].getSalary();
+                idWorker = i;
             }
         }
-        System.out.println("Максимальная зарплата сотрудника составляет - " + maxSalary + " рублей");
+        System.out.println("Сотрудник с максимальной зарплатой - " + employees[idWorker]);
     }
 
     public static void fullName() {
